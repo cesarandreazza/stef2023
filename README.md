@@ -1,4 +1,5 @@
 # Aprimoramento de Conhecimentos para Desenolvedores - Stef2023
+Práticas modernas de desenvolvimento: https://martinfowler.com/
 ## Lista de Requisitos:
   - Visual Studio 2022
   - .NET 8.0
