@@ -1,6 +1,0 @@
-@GuriDoDisc_HostAddress = http://localhost:5186
-
-GET {{GuriDoDisc_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
