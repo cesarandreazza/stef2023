@@ -1,5 +1,6 @@
 # Aprimoramento de Conhecimentos para Desenvolvedores - Stef2023
 Práticas modernas de desenvolvimento: https://martinfowler.com/
+API First: https://swagger.io/resources/articles/adopting-an-api-first-approach/
 ## Lista de Requisitos:
   - Visual Studio 2022
   - .NET 8.0
