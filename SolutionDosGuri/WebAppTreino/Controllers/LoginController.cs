@@ -10,7 +10,7 @@ namespace WebAppTreino.Controllers
     public class LoginController : ControllerBase
     {
         [HttpPost(Name = "login")]
-        public IActionResult Get([FromBody] UserRequest user)
+        public IActionResult Login([FromBody] UserRequest user)
         {
             return new JsonResult(new UserResponse() { Id = 0, Name= user.UserName, Email = user.Password}); 
         }
