@@ -1,18 +1,32 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using WebAppTreino.RequestModels;
-using WebAppTreino.ResponseModel;
+using WebAppTreino.Models.DataModels;
+using WebAppTreino.Models.RequestModels;
+using WebAppTreino.Models.ResponseModels;
+using WebAppTreino.Services;
 
-namespace WebAppTreino.Controllers
+namespace WebAppTreino.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class LoginController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class LoginController : ControllerBase
+    private IAuthService _authService;
+
+    public LoginController(IAuthService authService)
     {
-        [HttpPost(Name = "login")]
-        public IActionResult Login([FromBody] UserRequest user)
-        {
-            return new JsonResult(new UserResponse() { Id = 0, Name= user.UserName, Email = user.Password}); 
-        }
+        _authService = authService;
+    }
+
+    [HttpPost("login")]
+    public async  Task<IActionResult> Login([FromBody] UserRequest userRequest)
+    {
+        return Ok(await _authService.Login(userRequest.UserName, userRequest.Password)); 
+    }
+
+    [HttpPost("register")]
+    public async Task<IActionResult> Register([FromBody] UserRegisterRequest user)
+    {
+        return Ok(await _authService.Register(new User() { Name = user.Name, Email = user.Email, Phone = user.PhoneNumber }));
     }
 }
