@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using WebAppTreino.RequestModels;
-using WebAppTreino.ResponseModel;
+using WebAppTreino.Models.DataModels;
+using WebAppTreino.Models.RequestModels;
+using WebAppTreino.Services;
+
 
 namespace WebAppTreino.Controllers
 {
@@ -9,10 +11,15 @@ namespace WebAppTreino.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-        [HttpPost(Name = "login")]
-        public IActionResult Login([FromBody] UserRequest user)
+        private readonly IAccountService _accountService;
+        public LoginController(IAccountService accountService)
         {
-            return new JsonResult(new UserResponse() { Id = 0, Name= user.UserName, Email = user.Password}); 
+            _accountService = accountService;
+        }
+        [HttpPost(Name = "login")]
+        public IActionResult Login([FromBody] UserRequest userRequest)
+        {
+            return Ok(_accountService.Login(new User() { Name = userRequest.UserName, Password = userRequest.Password }));
         }
     }
 }
