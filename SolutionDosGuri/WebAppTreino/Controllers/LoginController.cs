@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebAppTreino.Models.DataModels;
 using WebAppTreino.Models.RequestModels;
 using WebAppTreino.Services;
+using FluentResults;
 
 
 namespace WebAppTreino.Controllers
@@ -17,9 +18,14 @@ namespace WebAppTreino.Controllers
             _accountService = accountService;
         }
         [HttpPost(Name = "login")]
-        public IActionResult Login([FromBody] UserRequest userRequest)
+        public async Task<IActionResult> Login([FromBody] UserRequest userRequest)
         {
-            return Ok(_accountService.Login(new User() { Name = userRequest.UserName, Password = userRequest.Password }));
+            var result = await _accountService.Login(new User() { Name = userRequest.UserName, Password = userRequest.Password });
+            if (result.IsFailed)
+            {
+                return NotFound();
+            }
+            return Ok("Deu certo");
         }
     }
 }
