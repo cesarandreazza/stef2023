@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Identity;
 using WebAppTreino.Models.DataModels;
 using WebAppTreino.Repositories;
+using WebAppTreino.Models.DataModels;
+
 
 namespace WebAppTreino.Services;
 

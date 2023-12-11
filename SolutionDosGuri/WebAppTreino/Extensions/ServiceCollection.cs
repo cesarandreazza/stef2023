@@ -9,6 +9,7 @@ public static class ServiceCollection
     {
         services.AddScoped<IAccountService, AccountService>();
         services.AddScoped<IUserRepository, UserRepository>();
+
         return services;
     }
  }
