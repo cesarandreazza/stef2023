@@ -1,4 +1,7 @@
 using WebAppTreino.Extensions;
+using Microsoft.EntityFrameworkCore;
+using WebAppTreino.Databases;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +12,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped();
-
+var connectionString = builder.Configuration["MONGODB_URI"];
+builder.Services.AddDbContext<AppDbContext>(options => options.UseMongoDB(connectionString, "stef2023"));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

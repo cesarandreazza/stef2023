@@ -11,9 +11,9 @@ namespace WebAppTreino.Controllers;
 [ApiController]
 public class LoginController : ControllerBase
 {
-    private IAuthService _authService;
+    private IAccountService _authService;
 
-    public LoginController(IAuthService authService)
+    public LoginController(IAccountService authService)
     {
         _authService = authService;
     }
@@ -21,12 +21,18 @@ public class LoginController : ControllerBase
     [HttpPost("login")]
     public async  Task<IActionResult> Login([FromBody] UserRequest userRequest)
     {
-        return Ok(await _authService.Login(userRequest.UserName, userRequest.Password)); 
+        return Ok(await _authService.Login(new User() {Email = userRequest.Email!, Password = userRequest.Password! })); 
     }
 
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] UserRegisterRequest user)
     {
         return Ok(await _authService.Register(new User() { Name = user.Name, Email = user.Email, Phone = user.PhoneNumber }));
+    }
+
+    [HttpPost("list")]
+    public async Task<IActionResult> List([FromBody] string query)
+    {
+        return Ok(await _authService.ListUser(query));
     }
 }
