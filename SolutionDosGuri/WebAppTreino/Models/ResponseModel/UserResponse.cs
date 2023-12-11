@@ -1,4 +1,4 @@
-﻿namespace WebAppTreino.ResponseModel
+﻿namespace WebAppTreino.Models.ResponseModel
 {
     public class UserResponse
     {
